@@ -1,0 +1,5 @@
+requests
+mypy
+flake8
+black
+pip-check-reqs
