@@ -4,9 +4,7 @@ from pydantic import BaseModel
 
 app = FastAPI(title="Product Service")
 
-@app.get("/")
-def read_root():
-    return {"message": "Welcome to Product Service! Go to /docs for API documentation."}
+
 
 class Product(BaseModel):
     id: str

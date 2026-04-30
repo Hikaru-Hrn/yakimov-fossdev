@@ -1,3 +1,4 @@
+
 import os
 
 import httpx
@@ -7,6 +8,9 @@ from pydantic import BaseModel, Field
 
 app = FastAPI(title="Order Service")
 
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to Product Service! Go to /docs for API documentation."}
 
 PRODUCT_SERVICE_URL = os.getenv(
     "PRODUCT_SERVICE_URL",
