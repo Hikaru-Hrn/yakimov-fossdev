@@ -37,7 +37,21 @@ check: lint typecheck check-requirements
 run: $(VENV)/bin/activate
 	$(PYTHON) src/app.py
 
-# Очистка (хорошая практика)
+# Очистка
 clean:
 	rm -rf $(VENV)
 	find . -type d -name "__pycache__" -exec rm -rf {} +
+
+BUILD_DIR = dist
+TWINE = $(VENV)/bin/twine
+BUILD = $(VENV)/bin/python3 -m build
+
+# 1. Сборка проекта
+build: $(VENV)/bin/activate
+	rm -rf $(BUILD_DIR)
+	$(PIP) install build twine  # Доставляем инструменты сборки
+	$(BUILD)
+
+# 2. Публикация на TestPyPI
+publish: build
+	$(TWINE) upload --repository testpypi $(BUILD_DIR)/*
